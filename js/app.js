@@ -1,19 +1,21 @@
 // Enemies our player must avoid
-var Enemy = function() {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
+var Enemy = function(x, y, speed) {
     this.sprite = 'images/enemy-bug.png';
+    this.x = x;
+    this.y = y;
+    this.speed = speed;
 }
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
+    if(this.x < ctx.canvas.width){
+        this.x += this.speed * dt;
+    }
+    //This will reset if the enemy is off the screen
+    else{
+        this.x = -75;
+    }
 }
 
 // Draw the enemy on the screen, required method for game
@@ -21,16 +23,72 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
+//Player Class
+var Player = function(x,y){
+    this.sprite = "images/char-cat-girl.png";
+    this.x = x;
+    this.y = y;
+}
 
+Player.prototype.update = function(dt){
+   //Reset player back to start once they reach the top
+    if(this.y < 50){
+        player.reset();
+    }
+    //Players area
+    playerPosition = {
+        "left": this.x,
+        "bottom": this.y,
+        "right": this.x+50,
+        "top": this.y+70,
+    }
+    //Iterate through allEemies and define enemy area
+    for(e=0; e<allEnemies.length; e++){
+        bugPosition = {
+            "left": allEnemies[e].x,
+            "bottom": allEnemies[e].y,
+            "right": allEnemies[e].x+70,
+            "top": allEnemies[e].y+70,
+        }
+        //Collision Detect
+    if(playerPosition.left<bugPosition.right &&
+        playerPosition.bottom<bugPosition.top &&
+        playerPosition.right>bugPosition.left &&
+        playerPosition.top>bugPosition.bottom){
+        player.reset(); }
+    }
+}
 
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
+//Player reset function.
+Player.prototype.reset = function(){
+    this.x = 200;
+    this.y = 400;
+}
 
+Player.prototype.render = function(){
+   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+}
 
+Player.prototype.handleInput = function(key){
+    if(key === "left" && this.x > 25){
+        this.x = this.x - 100;
+    }
+    if(key === "up" && this.y > 0){
+        this.y = this.y - 82.5;
+    }
+    if(key === "right" && this.x < 400){
+        this.x = this.x + 100;
+    }
+    if(key === "down" && this.y < 400){
+        this.y = this.y + 82.5;
+    }
+}
+
+var allEnemies = [new Enemy(0, 60, 100),
+                  new Enemy(0, 145, 200),
+                  new Enemy(0, 230, 300)];
+
+var player = new Player(200, 400);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
