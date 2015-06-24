@@ -24,10 +24,11 @@ Enemy.prototype.render = function () {
 }
 
 //Player Class
-var Player = function (x,y) {
+var Player = function (x, y, playerPosition) {
     this.sprite = "images/char-cat-girl.png";
     this.x = x;
     this.y = y;
+    this.playerPosition = playerPosition;
 };
 
 Player.prototype.update = function(dt) {
