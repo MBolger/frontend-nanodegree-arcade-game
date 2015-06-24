@@ -4,51 +4,51 @@ var Enemy = function(x, y, speed) {
     this.x = x;
     this.y = y;
     this.speed = speed;
-}
+};
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-    if(this.x < ctx.canvas.width){
+    if(this.x < ctx.canvas.width) {
         this.x += this.speed * dt;
     }
     //This will reset if the enemy is off the screen
-    else{
+    else {
         this.x = -75;
     }
-}
+};
 
 // Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+Enemy.prototype.render = function () {
+    ctx.drawImage (Resources.get(this.sprite), this.x, this.y);
 }
 
 //Player Class
-var Player = function(x,y){
+var Player = function (x,y) {
     this.sprite = "images/char-cat-girl.png";
     this.x = x;
     this.y = y;
-}
+};
 
-Player.prototype.update = function(dt){
+Player.prototype.update = function(dt) {
    //Reset player back to start once they reach the top
-    if(this.y < 50){
+    if(this.y < 50) {
         player.reset();
     }
     //Players area
     playerPosition = {
-        "left": this.x,
-        "bottom": this.y,
-        "right": this.x+50,
-        "top": this.y+70,
+        'left': this.x,
+        'bottom': this.y,
+        'right': this.x+50,
+        'top': this.y+70,
     }
     //Iterate through allEemies and define enemy area
-    for(e=0; e<allEnemies.length; e++){
+    for(e = 0; e < allEnemies.length; e++) {
         bugPosition = {
-            "left": allEnemies[e].x,
-            "bottom": allEnemies[e].y,
-            "right": allEnemies[e].x+70,
-            "top": allEnemies[e].y+70,
+            'left': allEnemies[e].x,
+            'bottom': allEnemies[e].y,
+            'right': allEnemies[e].x+70,
+            'top': allEnemies[e].y+70,
         }
         //Collision Detect
     if(playerPosition.left<bugPosition.right &&
@@ -57,32 +57,32 @@ Player.prototype.update = function(dt){
         playerPosition.top>bugPosition.bottom){
         player.reset(); }
     }
-}
+};
 
 //Player reset function.
-Player.prototype.reset = function(){
+Player.prototype.reset = function() {
     this.x = 200;
     this.y = 400;
-}
+};
 
-Player.prototype.render = function(){
+Player.prototype.render = function() {
    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 Player.prototype.handleInput = function(key){
-    if(key === "left" && this.x > 25){
+    if(key === 'left' && this.x > 25) {
         this.x = this.x - 100;
     }
-    if(key === "up" && this.y > 0){
+    if(key === 'up' && this.y > 0) {
         this.y = this.y - 82.5;
     }
-    if(key === "right" && this.x < 400){
+    if(key === 'right' && this.x < 400) {
         this.x = this.x + 100;
     }
-    if(key === "down" && this.y < 400){
+    if(key === 'down' && this.y < 400) {
         this.y = this.y + 82.5;
     }
-}
+};
 
 var allEnemies = [new Enemy(0, 60, 100),
                   new Enemy(0, 145, 200),
