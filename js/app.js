@@ -46,7 +46,7 @@ Player.prototype.update = function(dt) {
         'top': this.y+70,
     }
     //Iterate through allEemies and define enemy area
-    for(e = 0; e < allEnemies.length; e++) {
+    for(var e = 0; e < allEnemies.length; e++) {
         bugPosition = {
             'left': allEnemies[e].x,
             'bottom': allEnemies[e].y,
