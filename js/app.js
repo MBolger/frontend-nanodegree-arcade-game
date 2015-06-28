@@ -31,13 +31,15 @@ var Player = function (x, y, playerPosition) {
     this.playerPosition = playerPosition;
 };
 
+
+
 Player.prototype.update = function(dt) {
    //Reset player back to start once they reach the top
     if(this.y < 50) {
         this.reset();
     }
     //Players area
-    playerPosition = {
+    var playerPosition = {
         'left': this.x,
         'bottom': this.y,
         'right': this.x+50,
