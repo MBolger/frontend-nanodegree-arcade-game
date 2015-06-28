@@ -1,5 +1,6 @@
 // Enemies our player must avoid
 var Enemy = function(x, y, speed) {
+    "use strict";
     this.sprite = 'images/enemy-bug.png';
     this.x = x;
     this.y = y;
@@ -9,6 +10,7 @@ var Enemy = function(x, y, speed) {
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
+    "use strict";
     if(this.x < ctx.canvas.width) {
         this.x += this.speed * dt;
     }
@@ -20,11 +22,13 @@ Enemy.prototype.update = function(dt) {
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function () {
+    "use strict";
     ctx.drawImage (Resources.get(this.sprite), this.x, this.y);
 };
 
 //Player Class
 var Player = function (x, y, playerPosition) {
+    "use strict";
     this.sprite = "images/char-cat-girl.png";
     this.x = x;
     this.y = y;
@@ -35,6 +39,7 @@ var Player = function (x, y, playerPosition) {
 
 Player.prototype.update = function(dt) {
    //Reset player back to start once they reach the top
+    "use strict";
     if(this.y < 50) {
         this.reset();
     }
@@ -46,13 +51,13 @@ Player.prototype.update = function(dt) {
         'top': this.y+70,
     }
     //Iterate through allEemies and define enemy area
-    for(var e = 0; e < allEnemies.length; e++) {
-        bugPosition = {
+    for(var e = 0, len = allEnemies.length; e < len; e++) {
+        var bugPosition = {
             'left': allEnemies[e].x,
             'bottom': allEnemies[e].y,
             'right': allEnemies[e].x+70,
             'top': allEnemies[e].y+70,
-        }
+        };
         //Collision Detect
     if(playerPosition.left<bugPosition.right &&
         playerPosition.bottom<bugPosition.top &&
