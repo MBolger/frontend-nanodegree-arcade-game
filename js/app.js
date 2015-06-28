@@ -42,7 +42,7 @@ Player.prototype.update = function(dt) {
         'bottom': this.y,
         'right': this.x+50,
         'top': this.y+70,
-    };
+    }
     //Iterate through allEemies and define enemy area
     for(e = 0; e < allEnemies.length; e++) {
         bugPosition = {
@@ -50,13 +50,13 @@ Player.prototype.update = function(dt) {
             'bottom': allEnemies[e].y,
             'right': allEnemies[e].x+70,
             'top': allEnemies[e].y+70,
-        };
+        }
         //Collision Detect
     if(playerPosition.left<bugPosition.right &&
         playerPosition.bottom<bugPosition.top &&
         playerPosition.right>bugPosition.left &&
         playerPosition.top>bugPosition.bottom){
-        player.this(); }
+        player.reset(); }
     }
 };
 
