@@ -56,7 +56,7 @@ Player.prototype.update = function(dt) {
         playerPosition.bottom<bugPosition.top &&
         playerPosition.right>bugPosition.left &&
         playerPosition.top>bugPosition.bottom){
-        player.reset(); }
+        this.reset(); }
     }
 };
 
