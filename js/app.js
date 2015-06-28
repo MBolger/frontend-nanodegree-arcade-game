@@ -21,7 +21,7 @@ Enemy.prototype.update = function(dt) {
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function () {
     ctx.drawImage (Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 //Player Class
 var Player = function (x, y, playerPosition) {
@@ -34,7 +34,7 @@ var Player = function (x, y, playerPosition) {
 Player.prototype.update = function(dt) {
    //Reset player back to start once they reach the top
     if(this.y < 50) {
-        player.reset();
+        this.reset();
     }
     //Players area
     playerPosition = {
@@ -42,7 +42,7 @@ Player.prototype.update = function(dt) {
         'bottom': this.y,
         'right': this.x+50,
         'top': this.y+70,
-    }
+    };
     //Iterate through allEemies and define enemy area
     for(e = 0; e < allEnemies.length; e++) {
         bugPosition = {
@@ -50,13 +50,13 @@ Player.prototype.update = function(dt) {
             'bottom': allEnemies[e].y,
             'right': allEnemies[e].x+70,
             'top': allEnemies[e].y+70,
-        }
+        };
         //Collision Detect
     if(playerPosition.left<bugPosition.right &&
         playerPosition.bottom<bugPosition.top &&
         playerPosition.right>bugPosition.left &&
         playerPosition.top>bugPosition.bottom){
-        player.reset(); }
+        player.this(); }
     }
 };
 
